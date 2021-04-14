@@ -82,11 +82,11 @@
                 >
               </div></el-col
             >
-<!--            <el-col :span="1"
+            <el-col :span="1"
               ><div class="grid-content bg-purple">
                 <el-button type="primary" size="small">导出数据</el-button>
               </div></el-col
-            >-->
+            >
           </el-row>
         </el-form>
 
@@ -99,174 +99,135 @@
           border
         >
           <el-table-column type="selection" width="50"> </el-table-column>
-          <el-table-column label="部门" prop="departmentname" width="160">
+          <el-table-column label="部门" prop="departmentname">
           </el-table-column>
-          <el-table-column prop="roomno" label="窗口" width="50">
+          <el-table-column prop="roomno" label="窗口">
           </el-table-column>
-          <el-table-column width="200" label="时间" show-overflow-tooltip>
+          <el-table-column label="时间" show-overflow-tooltip>
             <template slot-scope="scope">{{
               scope.row.evlDate | time("YYYY-DD-MM hh:mm:ss")
             }}</template>
-          </el-table-column>
-          <el-table-column
-            prop="total"
-            label="总办件量"
-            show-overflow-tooltip
-          ></el-table-column>
-          <el-table-column
-            prop="satisfaction"
-            label="满意量"
-            show-overflow-tooltip
-          ></el-table-column>
-          <el-table-column
-            prop="ordinary"
-            width="90"
-            label="一般满意量"
-            show-overflow-tooltip
-          ></el-table-column>
-          <el-table-column
-            prop="unsatisfactory"
-            label="不满意量"
-            show-overflow-tooltip
-          ></el-table-column>
+</el-table-column>
+<el-table-column prop="total" label="总办件量" show-overflow-tooltip></el-table-column>
+<el-table-column prop="veryGood" label="满意量" show-overflow-tooltip></el-table-column>
+<el-table-column prop="noBad" label="一般满意量" show-overflow-tooltip></el-table-column>
+<el-table-column prop="bad" label="不满意量" show-overflow-tooltip></el-table-column>
 
-          <el-table-column
-            width="130"
-            prop="masses"
-            label="未评价(群众未评)"
-            show-overflow-tooltip
-          ></el-table-column>
-          <el-table-column
-            prop="massesnum"
-            label="总评价量"
-            show-overflow-tooltip
-          ></el-table-column>
-          <el-table-column
-            prop="efficiency"
-            label="满意率"
-            show-overflow-tooltip
-          >
-            <template slot-scope="scope">
-            {{scope.row.manYIdu}}%
+<el-table-column prop="unResponse" label="未评价(群众未评)" show-overflow-tooltip></el-table-column>
+<el-table-column prop="toTal1" label="总评价量" show-overflow-tooltip></el-table-column>
+<el-table-column prop="manYIdu" label="满意率" show-overflow-tooltip>
+    <template slot-scope="scope">
+      {{scope.row.manYIdu == 0? 100:scope.row.manYIdu}}%
           </template>
-          </el-table-column>
-        </el-table>
+</el-table-column>
+</el-table>
 
-        <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="currentPage"
-          :page-sizes="[10, 20, 30, 40]"
-          :page-size="form.pageSize"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="form.total"
-        >
-        </el-pagination>
-      </div>
-    </el-card>
-  </div>
+<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20, 30, 40]" :page-size="form.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="form.total">
+</el-pagination>
+</div>
+</el-card>
+</div>
 </template>
 
 <script>
-// import wicket from '../api/wicket'
-export default {
-  data() {
-    return {
-      form: {
-        departmentname: "",
-        timeData: [],
-        pageNum: 1,
-        pageSize: 10,
-        total: 0,
-      },
-      departmentSelList: [],
-      value1: "",
-      tableData: [],
-      multipleSelection: [],
-      currentPage: 5,
+    // import wicket from '../api/wicket'
+    export default {
+        data() {
+            return {
+                form: {
+                    departmentname: "",
+                    timeData: [],
+                    pageNum: 1,
+                    pageSize: 10,
+                    total: 0,
+                },
+                departmentSelList: [],
+                value1: "",
+                tableData: [],
+                multipleSelection: [],
+                currentPage: 5,
+            };
+        },
+        methods: {
+            handleSizeChange(val) {
+                this.form.pageSize = val;
+                this.getSearchList();
+            },
+            handleCurrentChange(val) {
+                this.form.pageNum = val;
+                this.getSearchList();
+            },
+            handleSelectionChange(val) {
+                this.multipleSelection = val;
+            },
+            // 查询
+            // getSearchList(pageNum, pageSize, total,section,timeData) {
+            //   pageNum = this.form.pageNum;
+            //   pageSize = this.form.pageSize;
+            //   total = this.form.total;
+            //   // let params = this.form;
+            //   section = this.form.section;
+            //   timeData = this.from.timeData;
+            //   console.log(section)
+            //   console.log(timeData)
+            //   this.$api.wicket.getSearchList(pageNum, pageSize, total,section,timeData).then((res) => {
+            //     // console.log(res.data.info);
+            //     this.tableData = res.data.info.list;
+            //     this.form.total = res.data.info.total;
+            //   });
+            // },
+
+            getSearchList() {
+                // let params = this.form;
+
+                // var beginTime =
+                //   this.form.timeData[0] == ""
+                //     ? ""
+                //     : this.$moment(this.form.timeData[0]).format("YYYY-MM-DD hh:mm:ss");
+                // var endTime =
+                //   this.form.timeData[1] == ""
+                //     ? ""
+                //     : this.$moment(this.form.timeData[1]).format("YYYY-MM-DD hh:mm:ss");
+                let beginTime = this.form.timeData[0];
+                let endTime = this.form.timeData[1];
+                let params = {
+                    pageNum: this.form.pageNum,
+                    pageSize: this.form.pageSize,
+                    // total: this.form.total,
+                    departmentname: this.form.departmentname,
+                    // beginTime:this.form.timeData[0],
+                    // endTime:this.form.timeData[1]
+                    beginTime: beginTime == undefined ? "" : this.$moment(beginTime).format("YYYY-MM-DD hh:mm:ss"),
+                    endTime: endTime == undefined ? "" : this.$moment(endTime).format("YYYY-MM-DD hh:mm:ss"),
+                };
+                this.$api.wicket.getSearchList(params).then((res) => {
+                    console.log(res.data.info.list)
+                    this.tableData = res.data.info.list;
+                    this.form.total = res.data.info.total;
+                });
+            },
+
+            // 下拉列表
+            // getSelectList() {
+            //   this.$api.department.getdepartment().then((res) => {
+            //     // console.log(res)
+            //     this.departmentSelList = res.data;
+            //   });
+            // },
+        },
+        mounted() {
+            // this.getSelectList();
+            this.getSearchList();
+        },
+        watch: {
+            $router(to, from) {},
+            // editableTabsValue: this.$store.state.menuName
+        },
     };
-  },
-  methods: {
-    handleSizeChange(val) {
-      this.form.pageSize = val;
-      this.getSearchList();
-    },
-    handleCurrentChange(val) {
-      this.form.pageNum = val;
-      this.getSearchList();
-    },
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
-    },
-    // 查询
-    // getSearchList(pageNum, pageSize, total,section,timeData) {
-    //   pageNum = this.form.pageNum;
-    //   pageSize = this.form.pageSize;
-    //   total = this.form.total;
-    //   // let params = this.form;
-    //   section = this.form.section;
-    //   timeData = this.from.timeData;
-    //   console.log(section)
-    //   console.log(timeData)
-    //   this.$api.wicket.getSearchList(pageNum, pageSize, total,section,timeData).then((res) => {
-    //     // console.log(res.data.info);
-    //     this.tableData = res.data.info.list;
-    //     this.form.total = res.data.info.total;
-    //   });
-    // },
-
-    getSearchList() {
-      // let params = this.form;
-
-      // var beginTime =
-      //   this.form.timeData[0] == ""
-      //     ? ""
-      //     : this.$moment(this.form.timeData[0]).format("YYYY-MM-DD hh:mm:ss");
-      // var endTime =
-      //   this.form.timeData[1] == ""
-      //     ? ""
-      //     : this.$moment(this.form.timeData[1]).format("YYYY-MM-DD hh:mm:ss");
-      let beginTime = this.form.timeData[0];
-      let endTime = this.form.timeData[1];
-      let params = {
-        pageNum: this.form.pageNum,
-        pageSize: this.form.pageSize,
-        // total: this.form.total,
-        departmentname: this.form.departmentname,
-        // beginTime:this.form.timeData[0],
-        // endTime:this.form.timeData[1]
-        beginTime: beginTime == undefined ? "" : this.$moment(beginTime).format("YYYY-MM-DD hh:mm:ss"),
-        endTime: endTime == undefined ? "" : this.$moment(endTime).format("YYYY-MM-DD hh:mm:ss"),
-      };
-      console.log(params);
-      this.$api.wicket.getSearchList(params).then((res) => {
-        console.log("aaa", res.data.info);
-        this.tableData = res.data.info.list;
-        this.form.total = res.data.info.total;
-      });
-    },
-
-    // 下拉列表
-    // getSelectList() {
-    //   this.$api.department.getdepartment().then((res) => {
-    //     // console.log(res)
-    //     this.departmentSelList = res.data;
-    //   });
-    // },
-  },
-  mounted() {
-    // this.getSelectList();
-    this.getSearchList();
-  },
-  watch: {
-    $router(to, from) {},
-    // editableTabsValue: this.$store.state.menuName
-  },
-};
 </script>
 
 <style scoped>
-.time {
-  width: 37vh;
-}
+    .time {
+        width: 37vh;
+    }
 </style>

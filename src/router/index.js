@@ -10,39 +10,37 @@ import Home from '@/views/home'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home,
-      children: [{
-        path: 'wicket',
-        name: 'wicket',
-        component: Wicket
+    routes: [{
+            path: '/',
+            name: 'home',
+            component: Home,
+            children: [{
+                path: 'wicket',
+                name: 'wicket',
+                component: Wicket
 
-      }, {
-        path: 'jobNum',
-        name: 'jobNum',
-        component: JobNum
+            }, {
+                path: 'jobNum',
+                name: 'jobNum',
+                component: JobNum
 
-      }, {
-        path: 'incident',
-        name: 'incident',
-        component: Incident
+            }, {
+                path: 'incident',
+                name: 'incident',
+                component: Incident
 
-      }, {
-        path: 'department',
-        name: 'department',
-        component: Department
+            }, {
+                path: 'department',
+                name: 'department',
+                component: Department
 
-      }, {
-        path: 'today',
-        name: 'today',
-        component: Today
+            }, {
+                path: 'today',
+                name: 'today',
+                component: Today
 
-      }
-      ]
-    },
+            }]
+        },
 
-  ]
+    ]
 })

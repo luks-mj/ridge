@@ -14,51 +14,55 @@
 </template>
 
 <script>
-import MenuList from "@/components/MenuList";
-import breadcrumb from "@/components/breadcrumb";
-export default {
-  components: {
-    MenuList,
-    breadcrumb
-  },
-  data () {
-    return {
+    import MenuList from "@/components/MenuList";
+    import breadcrumb from "@/components/breadcrumb";
+    export default {
+        components: {
+            MenuList,
+            breadcrumb
+        },
+        data() {
+            return {
+
+            };
+        },
+
+        methods: {
+
+
+        },
+        mounted() {
+
+
+        },
 
     };
-  },
-
-  methods: {
-
-
-  },
-  mounted () {
-
-
-  },
-
-};
 </script>
 
 <style>
-.home-container {
-  height: 100%;
-}
-.list {
-  height: calc(100vh - 60px);
-}
-.header-font {
-  text-align: center;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 60px;
-}
-.el-header {
-  /* background: #409eff; */
-}
-.el-aside {
-  /* background: #627bca; */
-}
-/* .el-tabs__new-tab{
+    .home-container {
+        height: 100%;
+    }
+    
+    .list {
+        height: calc(100vh - 60px);
+    }
+    
+    .header-font {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 60px;
+    }
+    
+    .el-header {
+        /* background: #409eff; */
+    }
+    
+    .el-aside {
+        /* background: #627bca; */
+    }
+    /* .el-tabs__new-tab{
   display: none;
 } */
 </style>
