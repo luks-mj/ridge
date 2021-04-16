@@ -151,7 +151,7 @@
                 let beginTime = this.form.timeData[0];
                 let endTime = this.form.timeData[1];
                 let params = {
-                    roomNo: this.form.roomNo,
+                    roomno: this.form.roomNo,
                     pageNum: this.form.pageNum,
                     pageSize: this.form.pageSize,
                     //departmentname: this.form.departmentname,
@@ -161,6 +161,7 @@
                         "" : this.$moment(endTime).format("YYYY-MM-DD hh:mm:ss"),
                 };
                 this.$api.wicket.getWicketlist(params).then((res) => {
+                    console.log(params)
                     this.tableData = res.data.info.list;
                     this.form.total = res.data.info.total;
                 });

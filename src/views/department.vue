@@ -200,11 +200,15 @@
                     beginTime: beginTime == undefined ? "" : this.$moment(beginTime).format("YYYY-MM-DD hh:mm:ss"),
                     endTime: endTime == undefined ? "" : this.$moment(endTime).format("YYYY-MM-DD hh:mm:ss"),
                 };
-                this.$api.wicket.getSearchList(params).then((res) => {
-                    console.log(res.data.info.list)
-                    this.tableData = res.data.info.list;
-                    this.form.total = res.data.info.total;
-                });
+                if (params.departmentname == "分水行政服务中心" || params.departmentname == "") {
+                    this.$api.wicket.getSearchList(params).then((res) => {
+                        this.tableData = res.data.info.list;
+                        this.form.total = res.data.info.total;
+                    });
+                } else {
+                    this.tableData = null
+                }
+
             },
 
             // 下拉列表

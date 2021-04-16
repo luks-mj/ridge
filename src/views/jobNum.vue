@@ -121,7 +121,7 @@
                 let beginTime = this.form.timeData[0];
                 let endTime = this.form.timeData[1];
                 let params = {
-                    input: this.form.input,
+                    userId: this.form.input,
                     pageNum: this.form.pageNum,
                     pageSize: this.form.pageSize,
                     beginTime: beginTime == undefined ?
@@ -129,6 +129,7 @@
                     endTime: endTime == undefined ?
                         "" : this.$moment(endTime).format("YYYY-MM-DD hh:mm:ss"),
                 };
+                console.log(params)
                 this.$api.wicket.getJobNumlist(params).then((res) => {
                     this.tableData = res.data.info.list;
                     this.form.total = res.data.info.total;

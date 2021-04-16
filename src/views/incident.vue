@@ -8,7 +8,7 @@
               ><div class="grid-content bg-purple">
                 <el-form-item>
                   <el-select
-                    v-model="form.departmentname"
+                    v-model="form.groupname"
                     placeholder="选择事项"
                     size="small"
                   >
@@ -115,7 +115,7 @@
                     pageNum: 1,
                     pageSize: 10,
                     total: 0,
-                    departmentname: "",
+                    groupname: "",
                     timeData: [],
                 },
                 tableData: [],
@@ -141,7 +141,7 @@
                 let params = {
                     pageNum: this.form.pageNum,
                     pageSize: this.form.pageSize,
-                    departmentname: this.form.departmentname,
+                    groupname: this.form.groupname,
                     beginTime: beginTime == undefined ?
                         "" : this.$moment(beginTime).format("YYYY-MM-DD hh:mm:ss"),
                     endTime: endTime == undefined ?
